@@ -54,7 +54,7 @@ Ensure that API requests are securely made using authentication methods.
 
 ## 6. API KEY & URLS for localhost
 
-```javascript
+```html
 <script>
 const API_KEY = 'vlWnzo3b.LzCsbJisS4JxZvFA9IqM5Z0udtSgjnpq';
 const DOCUMENT_API_URL = 'http://127.0.0.1:8000/api/documents/';
@@ -65,7 +65,7 @@ const DETAILS_API_URL = 'http://127.0.0.1:8000/api/document-details/';
 
 ## 7. API KEY & URLS for external server
 
-```javascript
+```html
 <script>
 const API_KEY = 'vlWnzo3b.LzCsbJisS4JxZvFA9IqM5Z0udtSgjnpq';
 const DOCUMENT_API_URL = 'https://openkey.pythonanywhere.com/api/documents/';
