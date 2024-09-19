@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrap/css/ajax_cloudfare.css" rel="stylesheet">
+    <link href="bootstrap/css/fonts.css" rel="stylesheet">
+    <link href="bootstrap/css/datatable.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap.min2.css" rel="stylesheet">
+    <link href="bootstrap/css/ajax_jquery.css" rel="stylesheet">
+    <link href="bootstrap/awesome/css/all.min.css" rel="stylesheet">
+    <link href="bootstrap/awesome/css/fontawesome.min.css" rel="stylesheet">
+    <link href="bootstrap/css/awaresome.css" rel="stylesheet">
+    <link href="bootstrap/css/bootstrap_buttons.css" rel="stylesheet">
+    <style>
+        /* Ensure background stays consistent with blur */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            background: url('images/q.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+
+        /* Blur effect that covers the entire body */
+        .bg-blur {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(10px);
+            background-color: rgba(0, 0, 0, 0.6); /* Optional dark overlay */
+            z-index: 1;
+        }
+
+        /* Ensure container sits above the blur layer */
+        .content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .accordion-button:focus {
+            box-shadow: none;
+        }
+
+        .card-header {
+            background-color: #343a40;
+            color: #fff;
+        }
+
+        .accordion-button {
+            color: #fff;
+            background-color: #343a40;
+        }
+
+        .accordion-button.collapsed {
+            color: #fff;
+            background-color: #343a40;
+        }
+
+        .accordion-body {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Blur Layer -->
+    <div class="bg-blur"></div>
+
+    <!-- Main Content Area -->
+    <div class="content">
+        <!-- Accordion for documents -->
+        <div class="container">
+            <div class="card bg-secondary mt-5">
+                <div class="card-body">
+            <div class="accordion" id="documentsAccordion">
+                <!-- Dynamic accordion items will be injected here -->
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="bootstrap/js/jquery.js"></script>
+    <script src="bootstrap/js/jquery_ajax.js"></script>
+    <script src="bootstrap/js/jquery_datatable.js"></script>
+    <script src="bootstrap/js/datatable.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script>
+        
+        $(document).ready(function () {
+            const API_KEY = 'vlWnzo3b.LzCsbJisS4JxZvFA9IqM5Z0udtSgjnpq';
+            //const DOCUMENT_API_URL = 'http://127.0.0.1:8000/api/documents/';
+            //const DETAILS_API_URL = 'http://127.0.0.1:8000/api/document-details/';
+            const DOCUMENT_API_URL = 'https://openkey.pythonanywhere.com/api/documents/';
+            const DETAILS_API_URL = 'https://openkey.pythonanywhere.com/api/document-details/';
+
+            // Fetch documents and their details from the APIs
+            $.when(
+                $.ajax({
+                    url: DOCUMENT_API_URL,
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Api-Key ' + API_KEY
+                    }
+                }),
+                $.ajax({
+                    url: DETAILS_API_URL,
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Api-Key ' + API_KEY
+                    }
+                })
+            ).done(function (documentsData, detailsData) {
+                let documents = documentsData[0];
+                let details = detailsData[0];
+                let detailsMap = {};
+
+                // Map DocumentDetails by document ID
+                details.forEach(detail => {
+                    if (!detailsMap[detail.document.id]) {
+                        detailsMap[detail.document.id] = [];
+                    }
+                    detailsMap[detail.document.id].push(detail);
+                });
+
+                let output = '';
+                documents.forEach((document, index) => {
+                    let documentDetails = detailsMap[document.id] || [];
+                    let detailsList = '';
+
+                    documentDetails.forEach(detail => {
+                        detailsList += `
+                            <li class="list-group-item">
+                                Additional Info: ${detail.additional_info}
+                            </li>
+                            <li class="list-group-item">
+                                Reference Number: ${detail.reference_number}
+                            </li>
+                            <li class="list-group-item">
+                                Status: ${detail.status}
+                            </li>
+                            <li class="list-group-item">
+                                Category: ${detail.category}
+                            </li>
+                            <li class="list-group-item">
+                                Tags: ${detail.tags}
+                            </li>
+                            <li class="list-group-item">
+                                Remarks: ${detail.remarks}
+                            </li>
+                        `;
+                    });
+
+                    output += `
+                        <div class="card mt-2">
+                            <div class="card-header" id="heading${index}">
+                                <h5 class="mb-0">
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${index}" aria-expanded="false" aria-controls="collapse${index}">
+                                        <i class="fas fa-file-alt accordion-icon"></i>     ${document.title}
+                                    </button>
+                                </h5>
+                            </div>
+
+                            <div id="collapse${index}" class="accordion-collapse collapse" aria-labelledby="heading${index}" data-bs-parent="#documentsAccordion">
+                                <div class="accordion-body">
+                                    <img src="${document.image}" class="img-thumbnail" alt="Document Image" style="max-width: 150px; margin-bottom: 15px;">
+                                    <p><strong>Description:</strong> ${document.description}</p>
+                                    <p><strong>Uploaded By:</strong> <span class="badge bg-primary">${document.uploaded_by}</span></p>
+                                    <p><strong>Created At:</strong> ${new Date(document.created_at).toLocaleDateString()}</p>
+                                    <ul class="list-group mb-3">
+                                        ${detailsList}
+                                    </ul>
+                                    <a href="${document.file}" class="btn btn-primary" download>
+                                        <i class="fas fa-download"></i> Download File
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+                // Show document accordion
+                $('#documentsAccordion').html(output);
+            }).fail(function (error) {
+                console.log("Error fetching data: ", error);
+            });
+        });
+    </script>
+</body>
+</html>
