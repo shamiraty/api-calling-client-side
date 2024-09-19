@@ -4,16 +4,16 @@ Frontend Integration with a Secure API
 In this documentation, we will explore how to integrate a frontend with a secure API for listing movie documents and their corresponding PDF notes. The API is built using Django REST Framework and provides endpoints to fetch documents and their details. We will focus on fetching and displaying data on the frontend, including styling and handling the API responses.
 
 ## 2. Main Objective
-> The primary goal is to demonstrate how to:
+The primary goal is to demonstrate how to:
 
-#### Fetch Data: 
-> Connect to the API to retrieve a list of movie documents and their details.
+- #### Fetch Data: 
+Connect to the API to retrieve a list of movie documents and their details.
 
-#### Display Data: 
-> Present the data in an interactive and user-friendly format using Bootstrap's accordion component.
+- #### Display Data: 
+Present the data in an interactive and user-friendly format using Bootstrap's accordion component.
 
-#### Handle Security: 
-> Ensure that API requests are securely made using authentication methods.
+- #### Handle Security: 
+Ensure that API requests are securely made using authentication methods.
 
 ## 3. Specific Objective
 
@@ -28,7 +28,6 @@ In this documentation, we will explore how to integrate a frontend with a secure
 - **JavaScript/jQuery:** To make asynchronous requests to the API and dynamically update the webpage.
 - **Bootstrap:** For responsive design and UI components like the accordion.
 - **API:** A secure Django REST Framework API to fetch document data.
-
 
 ## 5. Data Types [ API calling variable ]
 
@@ -52,3 +51,13 @@ In this documentation, we will explore how to integrate a frontend with a secure
 - category (String): Category of the document.
 - `tags (String):` Associated tags.
 - `remarks (String):` Remarks about the document.
+
+## 6. API KEY & URLS
+
+```javascript
+const API_KEY = 'vlWnzo3b.LzCsbJisS4JxZvFA9IqM5Z0udtSgjnpq';
+//const DOCUMENT_API_URL = 'http://127.0.0.1:8000/api/documents/';
+//const DETAILS_API_URL = 'http://127.0.0.1:8000/api/document-details/';
+const DOCUMENT_API_URL = 'https://openkey.pythonanywhere.com/api/documents/';
+const DETAILS_API_URL = 'https://openkey.pythonanywhere.com/api/document-details/';
+```
