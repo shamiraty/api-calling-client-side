@@ -52,12 +52,23 @@ Ensure that API requests are securely made using authentication methods.
 - `tags (String):` Associated tags.
 - `remarks (String):` Remarks about the document.
 
-## 6. API KEY & URLS
+## 6. API KEY & URLS for localhost
 
 ```javascript
+<script>
 const API_KEY = 'vlWnzo3b.LzCsbJisS4JxZvFA9IqM5Z0udtSgjnpq';
-//const DOCUMENT_API_URL = 'http://127.0.0.1:8000/api/documents/';
-//const DETAILS_API_URL = 'http://127.0.0.1:8000/api/document-details/';
+const DOCUMENT_API_URL = 'http://127.0.0.1:8000/api/documents/';
+const DETAILS_API_URL = 'http://127.0.0.1:8000/api/document-details/';
+</script>
+```
+
+
+## 7. API KEY & URLS for external server
+
+```javascript
+<script>
+const API_KEY = 'vlWnzo3b.LzCsbJisS4JxZvFA9IqM5Z0udtSgjnpq';
 const DOCUMENT_API_URL = 'https://openkey.pythonanywhere.com/api/documents/';
 const DETAILS_API_URL = 'https://openkey.pythonanywhere.com/api/document-details/';
+</script>
 ```
