@@ -100,13 +100,16 @@ Value: Api-Key vlWnzo3b.LzCsbJisS4JxZvFA9IqM5Z0udtSgjnpq (replace with your actu
 ```
 - Then Send the Request: Click the Send button.
 - Postman will make a request to your API and show the response data below.
-`figure 1`
+
+**figure 1**
+```image
 ![aa](https://github.com/user-attachments/assets/f873e851-d9b0-4994-95f3-6e103de6b6a1)
-`figure 2`
+```
+**figure 2**
 ![bb](https://github.com/user-attachments/assets/e8c0a22d-e343-43e9-b765-3ee01e9b77dd)
-`figure 3`
+**figure 3**
 ![dd](https://github.com/user-attachments/assets/5f7471f0-5a30-440a-a880-d44a2667bc65)
-`figure 4`
+**figure 4**
 ![cc](https://github.com/user-attachments/assets/cd57247f-fa28-40f7-8e10-1c805f14943e)
 - If the response contains a list of documents or details, you should see the API returning JSON data, such as:
 `response example:  child table`
