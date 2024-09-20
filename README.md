@@ -1,12 +1,16 @@
 # FRONTEND API INTEGRATION DOCUMENTATION
 ![GG](https://github.com/user-attachments/assets/af82f681-5f1a-49d1-9e9c-4b7478c8a114)
-
 ## SECURE API INTEGRATION FOR THE FRONTEND
 ### OPEN SOURCE TECHNOLOGIES USED: HTML, CSS, JAVASCRIPT, BOOTSTRAP, JQUERY, AJAX
 
 # Creation of Backend API using Django
 You can find the backend API creation using Django here: [https://github.com/shamiraty/django-restful](https://github.com/shamiraty/django-restful)
 
+**Online Demo**
+open live demo [Click](https://openkey.pythonanywhere.com/)
+
+- `username:  demo`
+- `password: demo1234`
 ---
 ## 1. INTRODUCTION
 In this documentation, we will explore how to integrate a frontend with a secure API for listing movie documents and their corresponding PDF notes. The API is built using Django REST Framework and provides endpoints to fetch documents and their details. We will focus on fetching and displaying data on the frontend, including styling and handling the API responses.
